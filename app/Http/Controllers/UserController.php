@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Response;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use DB;
@@ -32,4 +33,18 @@ Class UserController extends Controller {
         return $this->successResponse($users);
     }
 
+
+    public function add(Request $request){
+        $rules = [
+            'customer_name' => 'required|max:20',
+            'customer_age' => 'required|max:3',
+            'customer_sex' => 'required|max:1',
+        ];
+
+        $this->validate($request,$rules);
+
+        $user = User::create($request->all());
+
+        return $this->successResponse($user, Response::HTTP_CREATED);
+    }
 }

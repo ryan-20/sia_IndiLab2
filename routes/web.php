@@ -23,6 +23,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 });
 
 // more simple routes
+
 $router->get('/user', 'UserController@index'); // get all users records
 $router->post('/user', 'UserController@add'); // create new user record
 $router->get('/user/{id}', 'UserController@show'); // get user by id
