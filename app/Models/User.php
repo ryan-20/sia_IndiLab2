@@ -10,6 +10,9 @@
         // column sa table
         protected $fillable = [
         // column sa table
-        'customer_name', 'customer_age', 'customer_sex'
+        'customer_name', 'customer_age', 'customer_sex', 'customer_id'
         ];
+
+        public $timestamps = false;
+        protected $primaryKey = 'customer_id';
     }

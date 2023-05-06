@@ -17,7 +17,9 @@ Class UserController extends Controller {
         $this->request = $request;
     }
 
-    public function getUsers(){
+    // show all records (unsecure routes)
+    public function getUsers()
+    {
         // $users = User::all();
         $users = DB::connection('mysql')
         ->select("Select * from customer");
@@ -26,19 +28,23 @@ Class UserController extends Controller {
         return $this->successResponse($users);
     }
     
-    public function index(){
+    // show all records
+    public function index()
+    {
 
         $users = User::all();
 
         return $this->successResponse($users);
     }
 
-
-    public function add(Request $request){
+    // add of records
+    public function add(Request $request)
+    {
         $rules = [
             'customer_name' => 'required|max:20',
             'customer_age' => 'required|max:3',
-            'customer_sex' => 'required|max:1',
+            'customer_sex' => 'required|in:M,F',
+            'customer_id' => 'required|max:2',
         ];
 
         $this->validate($request,$rules);
@@ -47,4 +53,40 @@ Class UserController extends Controller {
 
         return $this->successResponse($user, Response::HTTP_CREATED);
     }
+
+    // delete of records
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return $this->successResponse($user);
+    }
+
+    // update of records
+    public function update(Request $request,$id)
+    {
+        $rules = [
+            'customer_name' => 'required|max:20',
+            'customer_age' => 'required|max:3',
+            'customer_sex' => 'required|max:1',
+            'customer_id' => 'required|max:2',
+        ]; 
+        $this->validate($request, $rules);
+        $user = User;;findOrFail($id);
+        $user->fill($request->all()); 
+    }
+
+    // show records
+    public function show($id)
+    {
+    $user = User::where('customer_id', $id)->first();
+    if($user){
+        return $this->successResponse($user);
+    }
+    {
+    return $this->errorResponse('user ID Does Not Exists', Response::HTTP_NOT_FOUND);
+    }
+    }
+
 }
