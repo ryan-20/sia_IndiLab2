@@ -1,18 +1,17 @@
 <?php
 
 
-    namespace App\Models;
+namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
-    class User extends Model{
-        protected $table = 'customer';
-        // column sa table
-        protected $fillable = [
-        // column sa table
-        'customer_name', 'customer_age', 'customer_sex', 'customer_id'
-        ];
+class User extends Model{
+    protected $table = 'customer';
+    // column sa table
+    protected $fillable = [
+    'customer_name', 'customer_age', 'customer_sex', 'customer_id'
+    ];
 
-        public $timestamps = false;
-        protected $primaryKey = 'customer_id';
-    }
+    public $timestamps = false;
+    protected $primaryKey = 'customer_id';
+}
