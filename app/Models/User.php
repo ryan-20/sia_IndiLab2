@@ -6,10 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model{
-    protected $table = 'student';
+    protected $table = 'customers';
     // column sa table
     protected $fillable = [
-    'student_name', 'student_age', 'student_sex'
+    'customer_name', 'customer_age', 'customer_sex'
     ];
 
     public $timestamps = false;

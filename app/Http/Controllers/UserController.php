@@ -22,7 +22,7 @@ Class UserController extends Controller {
     {
         // $users = User::all();
         $users = DB::connection('mysql')
-        ->select("Select * from customer");
+        ->select("Select * from customers");
 
         // return response()->json($users, 200);
         return $this->successResponse($users);
@@ -41,9 +41,9 @@ Class UserController extends Controller {
     public function add(Request $request)
     {
         $rules = [
-            'student_name' => 'required|max:50',
-            'student_age' => 'required|max:10',
-            'student_sex' => 'required|in:Male,Female',
+            'customer_name' => 'required|max:50',
+            'customer_age' => 'required|max:10',
+            'customer_sex' => 'required|in:Male,Female',
         ];
 
         $this->validate($request,$rules);
@@ -70,9 +70,9 @@ Class UserController extends Controller {
     public function update(Request $request,$id)
     {
         $rules = [
-            'student_name' => 'required|max:50',
-            'student_age' => 'required|max:10',
-            'student_sex' => 'required|in:Male,Female',
+            'customer_name' => 'required|max:50',
+            'customer_age' => 'required|max:10',
+            'customer_sex' => 'required|in:Male,Female',
         ]; 
         $this->validate($request, $rules);
         $user = User;;findOrFail($id);
