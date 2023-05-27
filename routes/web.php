@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 
 // unsecure routes
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('/user',['uses' => 'UserController@getUsers']);
+    $router->get('/users',['uses' => 'UserController@getUsers']);
 });
 
 // more simple routes

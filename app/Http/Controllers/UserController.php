@@ -75,7 +75,7 @@ Class UserController extends Controller {
             'customer_sex' => 'required|in:Male,Female',
         ]; 
         $this->validate($request, $rules);
-        $user = User;;findOrFail($id);
+        $user = User::findOrFail($id);
         $user->fill($request->all());
 
         if ($user->isClean()) {
