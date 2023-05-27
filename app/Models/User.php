@@ -9,7 +9,7 @@ class User extends Model{
     protected $table = 'customers';
     // column sa table
     protected $fillable = [
-    'customer_name', 'customer_age', 'customer_sex'
+    'customer_name', 'customer_age', 'customer_sex', 'product_id'
     ];
 
     public $timestamps = false;

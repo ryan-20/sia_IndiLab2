@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserJob;
 use Illuminate\Http\Response;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -42,13 +43,14 @@ Class UserController extends Controller {
     {
         $rules = [
             'customer_name' => 'required|max:50',
-            'customer_age' => 'required|max:10',
+            'customer_age' => 'required|max:3',
             'customer_sex' => 'required|in:Male,Female',
+            'product_id' => 'required|numeric|min:1|not_in:0'
         ];
 
         $this->validate($request,$rules);
-
-        $user = User::create($request->all());
+        $userjob = UserJob::findOrFail($request->product_id);
+        $user = User::create($request->all());  
 
         return $this->successResponse($user, Response::HTTP_CREATED);
     }
@@ -63,7 +65,7 @@ Class UserController extends Controller {
 
 
         //return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
-        
+
     }
 
     // update records
@@ -71,10 +73,13 @@ Class UserController extends Controller {
     {
         $rules = [
             'customer_name' => 'required|max:50',
-            'customer_age' => 'required|max:10',
+            'customer_age' => 'required|max:3',
             'customer_sex' => 'required|in:Male,Female',
-        ]; 
+            'product_id' => 'required|numeric|min:1|not_in:0'
+        ];
+
         $this->validate($request, $rules);
+        $userjob = UserJob::findOrFail($request->product_id);
         $user = User::findOrFail($id);
         $user->fill($request->all());
 
